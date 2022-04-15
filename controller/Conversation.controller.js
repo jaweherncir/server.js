@@ -1,7 +1,7 @@
 const conversationModel=require('../models/Conversation.model')
 const MessageModel=require('../models/Message.model')
 const ObjectID = require("mongoose").Types.ObjectId;
-//creat new cnversation
+//creat new conversation
 module.exports.newConversation=async (req,res)=>{
     const  newconversation=new conversationModel({members: [req.body.senderId,req.body.receiverId]});
     try

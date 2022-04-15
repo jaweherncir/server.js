@@ -19,5 +19,6 @@ router.put('/add-message/:id',upload.array("messageImage"),Message.addmessage)
 //get all message of one conversation
 router.get('/allmessage-conversation/:conversationId',Message.allMessageConversation)
 //get all imag of conversation
-router.get('/allImageMessage/:conversationId',Message.allImageMessage)
+//router.get('/allImageMessage/:conversationId',Message.allImageMessage)
+router.delete('/delet_message/:id',Message.deleteMessage)
 module.exports=router;

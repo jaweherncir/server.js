@@ -21,9 +21,12 @@ const MessageSchema=new mongoose.Schema(
 
 
 
-                }
+                },
 
-            ]},
+
+            ]
+
+        },
         image:[
               {
                   img: { type: String },

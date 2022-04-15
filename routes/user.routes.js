@@ -24,10 +24,11 @@ const my_storage = multer.diskStorage({
 // file filter function
 const fileFilterFunction = (req, file, cb) => {
     const file_extention = path.extname(file.originalname);
-    const allowedExtentions = [".jpg", ".jpeg", ".png", ".gif"]
+    const allowedExtentions = [".jpg", ".jpeg", ".png"]
     if (!allowedExtentions.includes(file_extention)) {
         return cb(new Error('Only images are allowed'))
     }
+
     cb(null, true)
 };
 // 2.0 create upload

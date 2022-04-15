@@ -1,4 +1,5 @@
 const MessageModel=require("../models/Message.model");
+const ObjectID = require("mongoose").Types.ObjectId;
 module.exports.newMessage=async (req,res)=>{
 
     const newMessage=new MessageModel({
@@ -26,7 +27,7 @@ module.exports.addmessage= (req,res)=>{
 
     if (req.files.length > 0) {
         image = req.files.map((file) => {
-            return { img: file.filename  };
+            return {img: file.filename  };
         });
     }
 
@@ -38,9 +39,11 @@ module.exports.addmessage= (req,res)=>{
             {$push:{
 
                             message:{
-                                messages: req.body.messages
+                                messages: req.body.messages,
+
                                    },
-                             image
+                    image
+
                     }
                 },
             {new :true},
@@ -73,7 +76,19 @@ module.exports.allMessageConversation=async (req,res)=>{
 
     }
 }
+module.exports.deleteMessage=async (req,res)=>{
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send('ID unknown '+req.params.id);
+    try {
+        await MessageModel.remove({_id:req.params.id})
+        res.status(200).json({message: "succes deleted message"});
 
+    }catch (err)
+    {
+        return res.status(500).json({message: err});
+
+    }
+}
 //delet all message of conversation
 //send  video in message
 
