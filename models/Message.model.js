@@ -18,7 +18,7 @@ const MessageSchema=new mongoose.Schema(
                     messages: {
                         type:String,
                              },
-
+                   image: [{img: {type: Array}}],
 
 
                 },
@@ -27,17 +27,7 @@ const MessageSchema=new mongoose.Schema(
             ]
 
         },
-        image:[
-              {
-                  img: { type: String },
-                  like:{
-                          type:Boolean,
-                          default:false
-                      },
-                  timestamp:Number,
 
-              }
-              ]
     },
     {timestamps:true}
 

@@ -1,12 +1,22 @@
 const MessageModel=require("../models/Message.model");
 const ObjectID = require("mongoose").Types.ObjectId;
 module.exports.newMessage=async (req,res)=>{
+    let image = [];
+
+    if (req.files.length > 0) {
+        image = req.files.map((file) => {
+            return  {img: file.filename}  ;
+        });
+    }
 
     const newMessage=new MessageModel({
         conversationId:req.body.conversationId,
         sender:req.body.sender,
-        image:[],
-        message:[]
+        message:{
+            messages: req.body.messages,
+            image
+           },
+
     });
     try{
         const savedMessage=await newMessage.save();
@@ -21,7 +31,7 @@ module.exports.newMessage=async (req,res)=>{
 
     }
 }
-module.exports.addmessage= (req,res)=>{
+/*module.exports.addmessage= (req,res)=>{
 
     let image = [];
 
@@ -63,7 +73,7 @@ module.exports.addmessage= (req,res)=>{
         return res.status(400).json({message: err});
 
     }
-}
+}*/
 module.exports.allMessageConversation=async (req,res)=>{
     try{
         const messages=await MessageModel.find(

@@ -14,8 +14,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-router.post('/new-message',Message.newMessage)
-router.put('/add-message/:id',upload.array("messageImage"),Message.addmessage)
+router.post('/new-message',upload.array("messageImage"),Message.newMessage)
+//router.put('/add-message/:id',upload.array("messageImage"),Message.addmessage)
 //get all message of one conversation
 router.get('/allmessage-conversation/:conversationId',Message.allMessageConversation)
 //get all imag of conversation
