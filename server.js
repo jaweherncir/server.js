@@ -32,7 +32,7 @@ app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
 });
-
+app.use('/uploads', express.static('uploads'));
 // routes
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);

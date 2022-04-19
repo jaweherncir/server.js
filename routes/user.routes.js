@@ -6,7 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const shortid = require('shortid')
-
+const { passwordResetValidator} = require('../utils/errors.utils');
 const my_storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null,path.join(path.dirname(__dirname),"client/public/uploads/profil"))
@@ -41,7 +41,8 @@ var uploadImageUser=multer({storage:my_storage})
 router.post("/signup",cpUpload,authController.signUp);
 router.post("/login",authController.signIn);
 router.get("/logout",authController.logOut);
-
+router.post('/email-password-send',authController.forgotPassword)
+router.post('/change-password',authController.resetPassword)
 //user display block
 router.get("/",userController.getAllUsers);
 router.get("/:id",userController.userInfo);

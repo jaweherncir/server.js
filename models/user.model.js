@@ -128,7 +128,11 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
-        deactivate: {  type: Boolean , default: false }
+        deactivate: {  type: Boolean , default: false },
+        resetPasswordLink: {
+            data: String,
+            default: ""
+        },
     },
     {
         timestamps: true,

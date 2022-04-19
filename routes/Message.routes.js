@@ -9,16 +9,25 @@ const storage = multer.diskStorage({
         cb(null, path.join(path.dirname(__dirname), "client/public/uploads/chatMessage"));
     },
     filename: function (req, file, cb) {
-        cb(null, shortid.generate() + "-" + file.originalname);
+        cb(null, file.originalname.toLowerCase().split(' ').join('-'));
     },
 });
+/*const imageUpload = multer({
 
-const upload = multer({ storage });
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png|jpg|mp4|MPEG-4|mkv|jpeg)$/)) {
+            // upload only png and jpg format
+            return cb(new Error('Please upload a Image'))
+        }
+        cb(undefined, true)
+    }
+})*/
+const upload = multer({ storage: storage });
 router.post('/new-message',upload.array("messageImage"),Message.newMessage)
 //router.put('/add-message/:id',upload.array("messageImage"),Message.addmessage)
 //get all message of one conversation
 router.get('/allmessage-conversation/:conversationId',Message.allMessageConversation)
 //get all imag of conversation
-//router.get('/allImageMessage/:conversationId',Message.allImageMessage)
+router.get('/allImageMessage/:conversationId',Message.allImageMessage)
 router.delete('/delet_message/:id',Message.deleteMessage)
 module.exports=router;

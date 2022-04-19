@@ -99,6 +99,24 @@ module.exports.deleteMessage=async (req,res)=>{
 
     }
 }
+
 //delet all message of conversation
-//send  video in message
+// ne marche pas
+module.exports.allImageMessage=async (req,res)=>{
+    try{
+        const messages=await MessageModel.findById(req.params.conversationId,(err,date)=>{
+            if(!err){
+                return  res.json({date})
+            } else
+                return  res.status(400).send(err)
+        })
+
+        res.status(200).json(messages);
+    }
+    catch (err)
+    {
+        return res.status(500).json({message: err});
+
+    }
+}
 
